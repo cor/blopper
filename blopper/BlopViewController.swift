@@ -11,6 +11,9 @@ import UIKit
 class BlopViewController: UIViewController {
     
     @IBOutlet weak var blopLabel: UILabel!
+ 
+    
+    let blopEngine = BlopEngine(blopValue: 7)
     
     var blopValue = BlopEngine.Answer.number(1) {
         didSet {
@@ -26,12 +29,12 @@ class BlopViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        blopValue = blopEngine.currentAnswer
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    @IBAction func screenTapped(sender: UITapGestureRecognizer) {
+        blopEngine.next()
+        blopValue = blopEngine.currentAnswer
     }
     
     
