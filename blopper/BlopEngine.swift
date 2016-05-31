@@ -10,11 +10,11 @@ import Foundation
 
 class BlopEngine {
     
-    var currentCount = 1
+    var count = 1
     var blopValue = 7
     
     var currentAnswer: Answer {
-        return getAnswer(number: currentCount)
+        return getAnswer(number: count)
     }
     
     init(blopValue: Int) {
@@ -35,7 +35,11 @@ class BlopEngine {
     }
     
     func next() {
-        currentCount += 1
+        count += 1
+    }
+    
+    func reset() {
+        count = 1
     }
     
 }

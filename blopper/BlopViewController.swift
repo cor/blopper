@@ -10,33 +10,43 @@ import UIKit
 
 class BlopViewController: UIViewController {
     
+    // MARK: - Outlets
     @IBOutlet weak var blopLabel: UILabel!
- 
+    @IBOutlet weak var countLabel: UILabel!
     
     let blopEngine = BlopEngine(blopValue: 7)
     
-    var blopValue = BlopEngine.Answer.number(1) {
-        didSet {
-            switch blopValue {
-            case .blop:
-                blopLabel.text = "Blop!"
-            case .number(let number):
-                blopLabel.text = "\(number)"
-            }
+    func updateUI() {
+        
+        // blop label
+        switch blopEngine.currentAnswer {
+        case .blop:
+            blopLabel.text = "Blop!"
+            view.backgroundColor = UIColor.redColor()
+        case .number(let number):
+            blopLabel.text = "\(number)"
+            view.backgroundColor = UIColor.greenColor()
         }
+        
+        // count label
+        countLabel.text = "\(blopEngine.count)"
     }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        blopValue = blopEngine.currentAnswer
+        updateUI()
     }
     
     @IBAction func screenTapped(sender: UITapGestureRecognizer) {
         blopEngine.next()
-        blopValue = blopEngine.currentAnswer
+        updateUI()
     }
     
+    @IBAction func reset(sender: UIButton) {
+        blopEngine.reset()
+        updateUI()
+    }
     
 }
 
